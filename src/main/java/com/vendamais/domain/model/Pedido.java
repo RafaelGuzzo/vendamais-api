@@ -3,12 +3,33 @@ package com.vendamais.domain.model;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Pedido {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPedido;
+
 	private Long numero;
 	private OffsetDateTime dataPedido;
+
+	@ManyToOne
 	private Cliente cliente;
+
+	@OneToMany
+	@JoinTable(
+			name = "PedidoProduto", 
+			joinColumns = @JoinColumn(name = "idpedido"), 
+			inverseJoinColumns = @JoinColumn(name = "idproduto"))
 	private List<Produto> produtos;
 
 	public Long getIdPedido() {

@@ -1,9 +1,21 @@
 package com.vendamais.domain.model;
 
-public class PedidoProduto {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class PedidoProduto {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPedidoProduto;
+	
+	@ManyToOne
 	private Pedido idPedido;
+	
+	@ManyToOne
 	private Produto idProduto;
 	private Long quantidade;
 
