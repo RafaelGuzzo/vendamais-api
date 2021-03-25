@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vendamais.api.dto.PedidoModel;
 import com.vendamais.domain.model.Pedido;
 import com.vendamais.domain.repository.PedidoRepository;
 import com.vendamais.domain.service.PedidoService;
@@ -26,14 +27,14 @@ public class PedidoController {
 	private PedidoService pedidoService;
 
 	@GetMapping
-	public List<Pedido> listar() {
-		return pedidoRepository.findAll();
+	public List<PedidoModel> listar() {
+		return pedidoService.listarTodosPedidos();
 	}
 
-	@PostMapping
+	/*@PostMapping
 	public Pedido adicionarPedido(@RequestBody Pedido pedido) {
 		return pedidoService.cadastraPedido(pedido);
-	}
+	}*/
 
 	@DeleteMapping("/{idpedido}")
 	public void removerPedido(@PathVariable Long idpedido) {
