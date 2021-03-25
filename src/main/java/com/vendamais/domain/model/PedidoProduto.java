@@ -1,22 +1,33 @@
 package com.vendamais.domain.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "pedidoproduto")
 public class PedidoProduto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idpedidoproduto")
 	private Long idPedidoProduto;
-	
+
+	@JsonIgnore
 	@ManyToOne
-	private Pedido idPedido;
-	
+	@JoinColumn(name = "idpedido")
+	private Pedido pedido;
+
 	@ManyToOne
-	private Produto idProduto;
+	@JoinColumn(name = "idproduto")
+	private Produto produto;
+
 	private Long quantidade;
 
 	public Long getIdPedidoProduto() {
@@ -27,20 +38,20 @@ public class PedidoProduto {
 		this.idPedidoProduto = idPedidoProduto;
 	}
 
-	public Pedido getIdPedido() {
-		return idPedido;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
-	public void setIdPedido(Pedido idPedido) {
-		this.idPedido = idPedido;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
-	public Produto getIdProduto() {
-		return idProduto;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setIdProduto(Produto idProduto) {
-		this.idProduto = idProduto;
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public Long getQuantidade() {

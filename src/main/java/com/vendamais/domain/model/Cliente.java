@@ -1,5 +1,6 @@
 package com.vendamais.domain.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +10,10 @@ import javax.persistence.Id;
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idcliente")
 	private Long idCliente;
+	
+	@Column(name = "razaosocial")
 	private String razaoSocial;
 	private String cnpj;
 	private String telefone;

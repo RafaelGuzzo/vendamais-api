@@ -1,14 +1,19 @@
 package com.vendamais.domain.model;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -17,20 +22,23 @@ public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idpedido")
 	private Long idPedido;
 
 	private Long numero;
+
+	@Enumerated(EnumType.STRING)
+	private SituacaoPedido situacao;
+
+	@Column(name = "datapedido")
 	private OffsetDateTime dataPedido;
 
 	@ManyToOne
+	@JoinColumn(name = "idcliente")
 	private Cliente cliente;
 
-	@OneToMany
-	@JoinTable(
-			name = "PedidoProduto", 
-			joinColumns = @JoinColumn(name = "idpedido"), 
-			inverseJoinColumns = @JoinColumn(name = "idproduto"))
-	private List<Produto> produtos;
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	private List<PedidoProduto> produtos = new ArrayList<>();
 
 	public Long getIdPedido() {
 		return idPedido;
@@ -64,12 +72,28 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public List<Produto> getProdutos() {
+	public List<PedidoProduto> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
+	public void setProdutos(List<PedidoProduto> produtos) {
 		this.produtos = produtos;
+	}
+
+	public SituacaoPedido getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(SituacaoPedido situacao) {
+		this.situacao = situacao;
+	}
+
+	public boolean temProdutos() {
+		if (getProdutos().get(0).getProduto() == null) {
+			return false;
+		}
+
+		return true;
 	}
 
 }
