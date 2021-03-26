@@ -2,20 +2,20 @@ package com.vendamais.api.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vendamais.api.dto.PedidoInput;
 import com.vendamais.api.dto.PedidoModel;
-import com.vendamais.domain.model.Pedido;
 import com.vendamais.domain.model.PedidoProduto;
 import com.vendamais.domain.repository.PedidoRepository;
 import com.vendamais.domain.service.PedidoService;
@@ -41,12 +41,13 @@ public class PedidoController {
 	}
 
 	@PostMapping
-	public PedidoModel adicionarPedido(@RequestBody PedidoModel pedidoModel) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public PedidoModel adicionarPedido(@Valid @RequestBody PedidoModel pedidoModel) {
 		return pedidoService.atualziarOuSalvaPedido(pedidoModel);
 	}
-	
+
 	@PostMapping("/finalizar")
-	public PedidoModel finalizar(@RequestBody PedidoModel pedidoModel) {
+	public PedidoModel finalizar(@Valid @RequestBody PedidoModel pedidoModel) {
 		return pedidoService.finalizar(pedidoModel);
 	}
 
@@ -59,5 +60,10 @@ public class PedidoController {
 	public void removerPedidoProduto(@RequestBody PedidoProduto pedidoProduto) {
 		pedidoService.deletePedidoProduto(pedidoProduto.getIdPedidoProduto());
 	}
-	
+
+	/*
+	 * @GetMapping("/numero-pedido") public Long proximoNumeroPedido() { return
+	 * pedidoRepository.proximoNumeroPedido(); }/
+	 */
+
 }

@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Pedido {
@@ -20,14 +21,17 @@ public class Pedido {
 	@Column(name = "idpedido")
 	private Long idPedido;
 
+	@NotNull
 	private Long numero;
 
 	@Enumerated(EnumType.STRING)
 	private SituacaoPedido situacao;
 
+	@NotNull
 	@Column(name = "datapedido")
 	private OffsetDateTime dataPedido;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "idcliente")
 	private Cliente cliente;

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,11 +20,13 @@ public class PedidoProduto {
 	@Column(name = "idpedidoproduto")
 	private Long idPedidoProduto;
 
+	@NotNull
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "idpedido")
 	private Pedido pedido;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "idproduto")
 	private Produto produto;

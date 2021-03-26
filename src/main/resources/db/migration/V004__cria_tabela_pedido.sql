@@ -10,3 +10,8 @@ create table pedido (
 
 alter table pedido add constraint fk_pedido_cliente
 foreign key (idcliente) references cliente (idcliente);
+
+
+CREATE SEQUENCE numeropedido_sequence
+INCREMENT 1
+START 100;

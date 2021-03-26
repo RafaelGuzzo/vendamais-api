@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Cliente {
@@ -12,11 +15,17 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idcliente")
 	private Long idCliente;
-	
+
+	@NotBlank
 	@Column(name = "razaosocial")
 	private String razaoSocial;
+
+	@NotNull
 	private String cnpj;
+
 	private String telefone;
+
+	@Email
 	private String email;
 
 	public Long getIdCliente() {

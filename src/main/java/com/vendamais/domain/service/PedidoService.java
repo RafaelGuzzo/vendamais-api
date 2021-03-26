@@ -5,15 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vendamais.api.dto.PedidoInput;
 import com.vendamais.api.dto.PedidoModel;
-import com.vendamais.api.dto.PedidoProdutoInput;
 import com.vendamais.api.dto.PedidoProdutoModel;
-import com.vendamais.domain.model.Cliente;
 import com.vendamais.domain.model.Pedido;
 import com.vendamais.domain.model.PedidoProduto;
 import com.vendamais.domain.model.Produto;
@@ -58,6 +54,10 @@ public class PedidoService {
 	}
 
 	public PedidoModel atualziarOuSalvaPedido(PedidoModel pedidoModel) {
+
+		if (pedidoModel.getNumero() == null) {
+			pedidoModel.setNumero(pedidoRepository.proximoNumeroPedido());
+		}
 
 		Pedido pedido = modelMapper.map(pedidoModel, Pedido.class);
 

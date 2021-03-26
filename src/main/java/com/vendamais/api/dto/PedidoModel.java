@@ -4,15 +4,29 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.vendamais.domain.model.Cliente;
 import com.vendamais.domain.model.SituacaoPedido;
 
 public class PedidoModel {
+
 	private Long idpedido;
+
+	@NotNull
 	private Long numero;
+
+	@NotNull
 	private SituacaoPedido situacao;
+
+	@NotNull
 	private OffsetDateTime dataPedido;
+
+	@NotNull
 	private Cliente cliente;
+
+	@NotEmpty
 	private List<PedidoProdutoModel> produtos = new ArrayList<>();
 
 	public Long getIdpedido() {
