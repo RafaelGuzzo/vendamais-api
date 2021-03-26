@@ -4,6 +4,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -14,7 +15,6 @@ public class PedidoModel {
 
 	private Long idpedido;
 
-	@NotNull
 	private Long numero;
 
 	@NotNull
@@ -23,6 +23,7 @@ public class PedidoModel {
 	@NotNull
 	private OffsetDateTime dataPedido;
 
+	@Valid
 	@NotNull
 	private Cliente cliente;
 

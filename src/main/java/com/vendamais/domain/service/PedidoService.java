@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.vendamais.api.dto.PedidoModel;
 import com.vendamais.api.dto.PedidoProdutoModel;
+import com.vendamais.domain.exception.EntidadeNaoEncontradaException;
+import com.vendamais.domain.exception.NegocioException;
 import com.vendamais.domain.model.Pedido;
 import com.vendamais.domain.model.PedidoProduto;
 import com.vendamais.domain.model.Produto;
@@ -37,7 +39,8 @@ public class PedidoService {
 	private ModelMapper modelMapper;
 
 	public PedidoModel buscaUmPedido(Long idpedido) {
-		Pedido pedido = pedidoRepository.findById(idpedido).orElseThrow();
+		Pedido pedido = pedidoRepository.findById(idpedido)
+				.orElseThrow(() -> new EntidadeNaoEncontradaException("Pedido não encontrado!"));
 		return pedidoModel(pedido);
 	}
 
@@ -82,6 +85,8 @@ public class PedidoService {
 	}
 
 	public void deletePedidoProduto(Long idpedidoproduto) {
+		PedidoProduto pedidoProduto = pedidoProdutoRepository.findById(idpedidoproduto)
+				.orElseThrow(() -> new NegocioException("Vinculo do produto com o pedido não encontrado!"));
 		pedidoProdutoRepository.deleteById(idpedidoproduto);
 
 	}

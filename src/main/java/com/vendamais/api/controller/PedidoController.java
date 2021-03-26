@@ -61,9 +61,9 @@ public class PedidoController {
 		pedidoService.deletePedidoProduto(pedidoProduto.getIdPedidoProduto());
 	}
 
-	/*
-	 * @GetMapping("/numero-pedido") public Long proximoNumeroPedido() { return
-	 * pedidoRepository.proximoNumeroPedido(); }/
-	 */
+	@GetMapping("/numero-pedido")
+	public Long proximoNumeroPedido() {
+		return pedidoRepository.proximoNumeroPedido();
+	}
 
 }
