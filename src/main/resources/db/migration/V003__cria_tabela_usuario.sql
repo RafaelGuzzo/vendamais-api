@@ -1,10 +1,9 @@
 create table usuario (
-	idusuario bigint not null auto_increment,
+	idusuario bigserial not null,
 	nome  varchar(255) not null,
-    email  varchar(255) not null,
+    email  varchar(255) not null unique,
     login  varchar(255) not null,
     senha  varchar(255) not null,
     
-    unique key unique_email(email),
 	primary key(idusuario)
 );

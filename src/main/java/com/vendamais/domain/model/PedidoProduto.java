@@ -28,6 +28,17 @@ public class PedidoProduto {
 	@JoinColumn(name = "idproduto")
 	private Produto produto;
 
+	public PedidoProduto() {
+
+	}
+
+	public PedidoProduto(Pedido pedido, Produto produto, Long quantidade) {
+		super();
+		this.pedido = pedido;
+		this.produto = produto;
+		this.quantidade = quantidade;
+	}
+
 	private Long quantidade;
 
 	public Long getIdPedidoProduto() {

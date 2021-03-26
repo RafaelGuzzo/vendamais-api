@@ -8,9 +8,9 @@ import com.vendamais.domain.model.Cliente;
 
 public class PedidoInput {
 	private Long numero;
-	private OffsetDateTime datapedido;
+	private OffsetDateTime dataPedido;
 	private Cliente cliente;
-	private List<PedidoProdutoModel> produtos = new ArrayList<>();
+	private List<PedidoProdutoInput> produtos = new ArrayList<>();
 
 	public Long getNumero() {
 		return numero;
@@ -20,12 +20,12 @@ public class PedidoInput {
 		this.numero = numero;
 	}
 
-	public OffsetDateTime getDatapedido() {
-		return datapedido;
+	public OffsetDateTime getDataPedido() {
+		return dataPedido;
 	}
 
-	public void setDatapedido(OffsetDateTime datapedido) {
-		this.datapedido = datapedido;
+	public void setDataPedido(OffsetDateTime dataPedido) {
+		this.dataPedido = dataPedido;
 	}
 
 	public Cliente getCliente() {
@@ -36,11 +36,11 @@ public class PedidoInput {
 		this.cliente = cliente;
 	}
 
-	public List<PedidoProdutoModel> getProdutos() {
+	public List<PedidoProdutoInput> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(List<PedidoProdutoModel> produtos) {
+	public void setProdutos(List<PedidoProdutoInput> produtos) {
 		this.produtos = produtos;
 	}
 

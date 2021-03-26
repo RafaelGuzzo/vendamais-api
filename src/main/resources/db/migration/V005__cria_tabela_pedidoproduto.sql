@@ -1,5 +1,5 @@
 create table pedidoproduto (
-	idpedidoproduto bigint not null auto_increment,
+	idpedidoproduto bigserial not null,
 	idpedido  bigint not null,
     idproduto bigint not null,
     quantidade bigint not null,
@@ -8,7 +8,7 @@ create table pedidoproduto (
 );
 
 alter table pedidoproduto add constraint fk_pedidoproduto_pedido
-foreign key (idpedido) references pedido (idpedido);
+foreign key (idpedido) references pedido (idpedido) on delete cascade on update cascade;
 
 alter table pedidoproduto add constraint fk_pedidoproduto_produto
-foreign key (idproduto) references produto (idproduto);
+foreign key (idproduto) references produto (idproduto) on delete cascade on update cascade;

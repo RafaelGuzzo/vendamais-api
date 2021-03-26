@@ -4,7 +4,7 @@ public class PedidoProdutoModel extends PedidoProdutoInput {
 
 	private Long idpedidoproduto;
 	private Long produtoId;
-	private Double totalProduto;
+	private Double totalProduto = 0.0;
 
 	public PedidoProdutoModel() {
 		super();
@@ -36,11 +36,6 @@ public class PedidoProdutoModel extends PedidoProdutoInput {
 
 	public void setTotalProduto(Double totalProduto) {
 		this.totalProduto = totalProduto;
-	}
-
-	private void calculaTotalProduto() {
-		this.totalProduto = 0.0;
-
 	}
 
 }

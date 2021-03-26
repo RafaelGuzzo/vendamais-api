@@ -1,9 +1,9 @@
 create table pedido (
-	idpedido bigint not null auto_increment,
+	idpedido bigserial not null,
 	numero  bigint not null,
 	situacao varchar(20) not null,
     idcliente bigint not null,
-    dataPedido datetime not null,
+    dataPedido timestamp not null,
     
 	primary key(idpedido)
 );
