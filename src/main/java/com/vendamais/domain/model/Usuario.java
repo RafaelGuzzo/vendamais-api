@@ -1,10 +1,30 @@
 package com.vendamais.domain.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+@Entity
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idusuario")
 	private Long idUsuario;
+
+	@NotBlank
 	private String nome;
+
+	@Email
 	private String email;
+
+	@NotBlank
 	private String login;
+
+	@NotBlank
 	private String senha;
 
 	public Long getIdUsuario() {
