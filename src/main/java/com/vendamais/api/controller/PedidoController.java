@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vendamais.api.dto.PedidoInput;
 import com.vendamais.api.dto.PedidoModel;
+import com.vendamais.api.dto.PedidoResumoModel;
 import com.vendamais.domain.model.PedidoProduto;
 import com.vendamais.domain.repository.PedidoRepository;
 import com.vendamais.domain.service.PedidoService;
@@ -29,7 +31,12 @@ public class PedidoController {
 
 	@Autowired
 	private PedidoService pedidoService;
-
+	
+	@GetMapping(params = "resumo")
+	public List<PedidoResumoModel> resumir(){
+		return pedidoService.resumoPedidos();
+	}
+	
 	@GetMapping
 	public List<PedidoModel> listar() {
 		return pedidoService.listarTodosPedidos();
@@ -42,12 +49,12 @@ public class PedidoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public PedidoModel adicionarPedido(@Valid @RequestBody PedidoModel pedidoModel) {
+	public PedidoModel adicionarPedido(@Valid @RequestBody PedidoInput pedidoModel) {
 		return pedidoService.atualziarOuSalvaPedido(pedidoModel);
 	}
 
 	@PostMapping("/finalizar")
-	public PedidoModel finalizar(@Valid @RequestBody PedidoModel pedidoModel) {
+	public PedidoModel finalizar(@Valid @RequestBody PedidoInput pedidoModel) {
 		return pedidoService.finalizar(pedidoModel);
 	}
 

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.vendamais.domain.exception.NegocioException;
+
 @Entity
 public class Pedido {
 
@@ -74,6 +76,18 @@ public class Pedido {
 
 	public void setSituacao(SituacaoPedido situacao) {
 		this.situacao = situacao;
+	}
+
+	public boolean pedidoFinalizado() {
+		return SituacaoPedido.FINALIZADO.equals(getSituacao());
+	}
+
+	public void finalizar() {
+		if (pedidoFinalizado()) {
+			throw new NegocioException("Pedido não pode ser finalizado! Situação:" + getSituacao());
+		}
+
+		setSituacao(SituacaoPedido.FINALIZADO);
 	}
 
 }
