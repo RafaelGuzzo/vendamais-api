@@ -1,0 +1,342 @@
+{
+	"info": {
+		"_postman_id": "6750762c-b21a-4c5d-ad1c-ad704867af35",
+		"name": "Venda Mais Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "cria pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idpedido\": 3,\r\n    \"dataPedido\": \"2021-03-22T21:00:00-03:00\",\r\n    \"cliente\": {\r\n        \"razaoSocial\": \"Rafael\",\r\n        \"cnpj\": \"0000012345678\",\r\n        \"telefone\": \"123456789\",\r\n        \"email\": \"Rafael@mail.com\"\r\n    },\r\n    \"produtos\": [\r\n        {\r\n            \"produtoCodigo\": \"TESTE\",\r\n            \"produtoDescricao\": \"Batata Doce\",\r\n            \"produtoPreco\": 15.0,\r\n            \"quantidade\": 4,\r\n            \"idpedidoproduto\": 6,\r\n            \"produtoId\": 6,\r\n            \"totalProduto\": 20.0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/pedidos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "atualiza, cria e finaliza pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idpedido\": 3,\r\n    \"numero\": 201,\r\n    \"dataPedido\": \"2021-03-22T21:00:00-03:00\",\r\n    \"cliente\": {\r\n        \"idCliente\": 5,\r\n        \"razaoSocial\": \"testado\",\r\n        \"cnpj\": \"123164654\",\r\n        \"telefone\": \"123456789\",\r\n        \"email\": \"teste@mail.com\"\r\n    },\r\n    \"produtos\": [\r\n        {\r\n            \"produtoCodigo\": \"TESTE\",\r\n            \"produtoDescricao\": \"Batata\",\r\n            \"produtoPreco\": 5.0,\r\n            \"quantidade\": 4,\r\n            \"idpedidoproduto\": 3,\r\n            \"produtoId\": 3,\r\n            \"totalProduto\": 20.0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/pedidos/finalizar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos",
+						"finalizar"
+					]
+				},
+				"description": "se o pedido ainda não existe vai criar com todos os dados, o mesmo para produto, se o produto não existe vai criar ou atualizar, apos isso já vai finaliza-lo.\r\nMetodo para usar na tela de cadastro de pedidos, quando clicado para editar um pedido ou quando iniciado um novo pedido."
+			},
+			"response": []
+		},
+		{
+			"name": "recupera todos pedidos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTY4MTQ0MjIsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJqdGkiOiIyZDVjM2Y2Yy0yZWUzLTRjZjItYmM0Mi0yN2NhMzRjMDNlNzYiLCJjbGllbnRfaWQiOiJyZWFjdCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.wd3KOcy7_ynYGYH8rvPit9q1zzk6dJVcm4TA-1drB4o",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/pedidos/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleta um pedido completo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/pedidos/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleta  pedidoproduto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idPedidoProduto\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/pedidos/1/produto",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos",
+						"1",
+						"produto"
+					]
+				},
+				"description": "deleta um produto de um pedido em pedidoproduto"
+			},
+			"response": []
+		},
+		{
+			"name": "recupera pedido por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/pedidos/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recupera um token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "react",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "react",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/oauth/token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oauth",
+						"token"
+					]
+				},
+				"description": "recupera um token passando dados do cliente e do usuario da aplicação"
+			},
+			"response": []
+		},
+		{
+			"name": "recupera um refresh_token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "react",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "react",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/oauth/token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTY4NTYxNDMsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiI2ODM1NmI2NC00ZmI1LTQ3MmYtYmYwOC04NGJkMjY4MzhjYjUiLCJjbGllbnRfaWQiOiJyZWFjdCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.h-l1GsClHTvMOgyNfQGPXmJ9gi1WWHrg5dijI0xDlbM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/tokens/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tokens",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retorna o proximo numero de pedido",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTY4MTQ0MjIsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJqdGkiOiIyZDVjM2Y2Yy0yZWUzLTRjZjItYmM0Mi0yN2NhMzRjMDNlNzYiLCJjbGllbnRfaWQiOiJyZWFjdCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.wd3KOcy7_ynYGYH8rvPit9q1zzk6dJVcm4TA-1drB4o",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/pedidos/numero-pedido",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos",
+						"numero-pedido"
+					]
+				},
+				"description": "Usado para recuperar o proximo numero de pedido e repassar a informação no formulario de cadastro de pedido"
+			},
+			"response": []
+		},
+		{
+			"name": "recupera todos pedidos resumido",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTY4MTQ0MjIsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJqdGkiOiIyZDVjM2Y2Yy0yZWUzLTRjZjItYmM0Mi0yN2NhMzRjMDNlNzYiLCJjbGllbnRfaWQiOiJyZWFjdCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.wd3KOcy7_ynYGYH8rvPit9q1zzk6dJVcm4TA-1drB4o",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/pedidos?resumo",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos"
+					],
+					"query": [
+						{
+							"key": "resumo",
+							"value": null
+						}
+					]
+				},
+				"description": "metodo usado para a tela de pedidos"
+			},
+			"response": []
+		}
+	]
+}
